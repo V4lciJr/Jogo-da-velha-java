@@ -7,7 +7,7 @@ public class Game {
 	
 	private Board board = new Board();
 	private Player[] players = new Player[Constants.SYMBOL_PLAYERS.length];
-	private int currentPlayerIndex = 0;
+	private int currentPlayerIndex = -1;
 	
 	public void play() 
 	{
@@ -20,11 +20,37 @@ public class Game {
 		
 		boolean gameEndend = false;
 		Player currentPlayer = nextPlayer();
+		Player winner = null;
 		
 		while(!gameEndend)
 		{
 			board.print();
+			boolean sequenceFound = currentPlayer.play();
+				
+			if(sequenceFound)
+			{
+				gameEndend = true;
+				winner = currentPlayer;
+			}
+			else if(board.isFull())
+			{
+				gameEndend = true;
+			}
+			
+			currentPlayer = nextPlayer();
 		}
+		
+		if (winner == null)
+		{
+			UI.printText("O jogo terminou empatado.");
+		}
+		else
+		{
+			UI.printText("O Jogador '" + winner.getName() + "' venceu o jogo!!");
+		}
+		
+		board.print();
+		UI.printText("Fim do Jogo");
 	}
 	
 	private Player createPlayer(int index)
