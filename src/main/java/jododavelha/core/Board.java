@@ -65,12 +65,21 @@ public class Board {
 		return true;
 	}
 	
-	public boolean play(Player player, Move move)
+	public boolean play(Player player, Move move) throws InvalidMoveException
 	{
 		int i = move.getI();
 		int j = move.getJ();
 		
-		// TODO validar os movimentos
+		if(i < 0 || j < 0 || i >= matrix.length || j >= matrix.length)
+		{
+			throw new InvalidMoveException("O intervalo da jogada é inválido.");
+		}
+		
+		if(matrix[i][j] != ' ') 
+		{
+			throw new InvalidMoveException("Jogada não permitida, esta jogada já foi realizada.");
+		}
+		
 		matrix[i][j] = player.getSymbol();
 		
 		return checkRows(player) || checkCols(player) || checkDiagonal1(player) || checkDiagonal2(player);
