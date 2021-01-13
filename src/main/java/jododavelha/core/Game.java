@@ -7,6 +7,7 @@ public class Game {
 	
 	private Board board = new Board();
 	private Player[] players = new Player[Constants.SYMBOL_PLAYERS.length];
+	private int currentPlayerIndex = 0;
 	
 	public void play() 
 	{
@@ -15,7 +16,14 @@ public class Game {
 		for (int i  = 0; i < players.length; i++)
 		{
 			players[i] = createPlayer(i);
+		}
 		
+		boolean gameEndend = false;
+		Player currentPlayer = nextPlayer();
+		
+		while(!gameEndend)
+		{
+			board.print();
 		}
 	}
 	
@@ -29,5 +37,17 @@ public class Game {
 		
 		return player;
 		
+	}
+	
+	private Player nextPlayer()
+	{
+		currentPlayerIndex++;
+		
+		if(currentPlayerIndex >= players.length)
+		{
+			currentPlayerIndex = 0;
+		}
+		
+		return players[currentPlayerIndex];
 	}
 }
