@@ -117,7 +117,7 @@ public class Board {
 	{
 		for(int j = 0; j < Constants.BOARD_SIZE; j++)
 		{
-			if(checkRow(j, player))
+			if(checkCol(j, player))
 			{
 				return true;
 			}
