@@ -1,6 +1,9 @@
 package jododavelha.core;
 
+import java.io.IOException;
+
 import jododavelha.Constants;
+import jododavelha.score.FileScoreManager;
 import jododavelha.score.ScoreManager;
 import jododavelha.ui.UI;
 
@@ -11,7 +14,7 @@ public class Game {
 	private int currentPlayerIndex = -1;
 	private ScoreManager scoreManager; 
 	
-	public void play() 
+	public void play() throws IOException 
 	{
 		scoreManager = createScoreManager();
 		UI.printGameTitle();
@@ -95,9 +98,8 @@ public class Game {
 		return players[currentPlayerIndex];
 	}
 	
-	private ScoreManager createScoreManager()
+	private ScoreManager createScoreManager() throws IOException
 	{
-		// TODO retornar objeto correto
-		return null;
+		return new FileScoreManager();
 	}
 }
